@@ -1,18 +1,21 @@
 {
-    "name"      : "isteven-angular-multiselect",
-    "version"   : "v3.0.0",
-    "main"      : [
-        "isteven-multi-select.js",
-        "isteven-multi-select.css"
-    ],
-    "ignore"    : [
-        ".git",
-        ".gitignore",
-        "bower.json",
-        "CHANGELOG.md",
-        "package.json",
-        "README.md",        
-        "screenshot.png",
-        "/doc"
-    ]
+  "name": "isteven-angular-multiselect",
+  "version": "3.0.0",
+  "main": [
+    "isteven-multi-select.js",
+    "isteven-multi-select.css"
+  ],
+  "dependencies": {
+    "angular-vs-repeat": "~1.0.0-rc5"
+  },
+  "ignore": [
+    ".git",
+    ".gitignore",
+    "bower.json",
+    "CHANGELOG.md",
+    "package.json",
+    "README.md",
+    "screenshot.png",
+    "/doc"
+  ]
 }
