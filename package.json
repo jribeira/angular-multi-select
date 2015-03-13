@@ -1,7 +1,7 @@
 {
-    "name": "isteven-angular-multiselect",
-    "version": "v3.0.0",
-    "description": "A multi select dropdown directive for AngularJS",
+    "name": "angular-multiselect",
+    "version": "v3.0.1",
+    "description": "A multi select dropdown directive for AngularJS with virtual scroll",
     "main": [
         "isteven-multi-select.js",
         "isteven-multi-select.css"
@@ -18,8 +18,5 @@
     ],
     "author": "Ignatius Steven <isteven.github@gmail.com> (https://github.com/isteven)",
     "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/isteven/angular-multi-select/issues"
-    },
-    "homepage": "https://github.com/isteven/angular-multi-select"
+    "homepage": "https://github.com/jaybone321/angular-multi-select"
 }
