@@ -6,6 +6,9 @@
         "isteven-multi-select.js",
         "isteven-multi-select.css"
     ],
+    "dependencies": {
+      "angular-vs-repeat": "~1.0.0-rc5"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/isteven/angular-multi-select.git"
