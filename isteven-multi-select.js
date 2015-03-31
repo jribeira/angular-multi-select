@@ -84,29 +84,29 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
                 '</button>' +
                 '<div class="checkboxLayer">' +
 
-                    '<div class="helperContainer" ng-if="displayHelper( \'filter\' ) || displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
-                        '<div class="line" ng-if="displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
+                    '<div class="helperContainer" ng-show="displayHelper( \'filter\' ) || displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
+                        '<div class="line" ng-show="displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
 
                             '<button type="button" class="helperButton"' +
-                                'ng-if="!isDisabled && displayHelper( \'all\' )"' +
+                                'ng-show="!isDisabled && displayHelper( \'all\' )"' +
                                 'ng-click="select( \'all\', $event );"' +
                                 'ng-bind-html="lang.selectAll">' +
                             '</button>'+
 
                             '<button type="button" class="helperButton"' +
-                                'ng-if="!isDisabled && displayHelper( \'none\' )"' +
+                                'ng-show="!isDisabled && displayHelper( \'none\' )"' +
                                 'ng-click="select( \'none\', $event );"' +
                                 'ng-bind-html="lang.selectNone">' +
                             '</button>'+
 
                             '<button type="button" class="helperButton reset"' +
-                                'ng-if="!isDisabled && displayHelper( \'reset\' )"' +
+                                'ng-show="!isDisabled && displayHelper( \'reset\' )"' +
                                 'ng-click="select( \'reset\', $event );"' +
                                 'ng-bind-html="lang.reset">'+
                             '</button>' +
                         '</div>' +
 
-                        '<div class="line" style="position:relative" ng-if="displayHelper( \'filter\' )">'+
+                        '<div class="line" style="position:relative" ng-show="displayHelper( \'filter\' )">' +
                                                     
                             '<input placeholder="{{lang.search}}" type="text"' +
                                 'ng-click="select( \'filter\', $event )" '+
@@ -300,7 +300,12 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             // List all the input elements.
             // This function will be called everytime the filter is updated. Not good for performance, but oh well..
             $scope.getFormElements = function() {                                     
-                formElements = [];
+            	formElements = [];
+
+            	if (!attrs.helperElements || $scope.helperElements === 'undefined') {
+            		return;
+            	}
+
                 // Get helper - select & reset buttons
                 var selectButtons = element.children().children().next().children().children()[ 0 ].getElementsByTagName( 'button' );
                 // Get helper - search
