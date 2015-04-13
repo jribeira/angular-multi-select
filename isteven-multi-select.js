@@ -80,7 +80,9 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             '<span class="multiSelect inlineBlock" id={{directiveId}}>' +
                 '<button type="button"' +
                     'ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton(); prepareGrouping; prepareIndex();"' +
-                    'ng-bind-html="varButtonLabel">' +
+	                'automation-name="SelectedItemList"' +
+		            'automation-data="{{selectedItemList}}"' +
+		            'ng-bind-html="varButtonLabel">' +
                 '</button>' +
                 '<div class="checkboxLayer">' +
 
@@ -121,6 +123,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
                     '<div vs-repeat class="checkBoxContainer">' +
                         '<div '+
                             'ng-repeat="item in filteredModel | filter:removeGroupEndMarker" class="multiSelectItem"'+
+	                        'automation-name="{{item.displayText}}"' +
                             'ng-class="{selected: item[ tickProperty ], horizontal: orientationH, vertical: orientationV, multiSelectGroup:item[ groupProperty ], disabled:itemIsDisabled( item )}"'+
                             'ng-click="syncItems( item, $event, $index );" '+
                             'ng-mouseleave="removeFocusStyle( tabIndex );"> '+
@@ -163,6 +166,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             $scope.tabIndex         = 0;            
             $scope.lang             = {};
             //$scope.localModel       = [];
+	        $scope.selectedItemList = '';
 
             var 
                 prevTabIndex        = 0,
@@ -589,7 +593,8 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             // refresh button label
             $scope.refreshButton = function() {
 
-                $scope.varButtonLabel   = '';                
+                $scope.varButtonLabel   = '';
+	            $scope.selectedItemList = '';
                 var ctr                 = 0;                  
 
                 // refresh button label...
@@ -613,7 +618,8 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
                 
                     angular.forEach( $scope.outputModel, function( value, key ) {
                         if ( typeof value !== 'undefined' ) {                        
-                            if ( ctr < tempMaxLabels ) {                            
+                            if ( ctr < tempMaxLabels ) {
+	                            $scope.selectedItemList += value.displayText + ', ';
                                 $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
                             }
                             ctr++;
@@ -1014,18 +1020,18 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             ////    }
             ////}, true );
 
-            ////// watch2 for changes in input model as a whole
-            ////// this on updates the multi-select when a user load a whole new input-model. We also update the $scope.backUp variable
-            ////$scope.$watch( 'localModel' , function( newVal ) {  
-            ////    if ( newVal ) {
-            ////        $scope.backUp = angular.copy( $scope.localModel );    
-            ////        $scope.updateFilter();
-            ////        $scope.prepareGrouping();
-            ////        $scope.prepareIndex();                                                              
-            ////        $scope.refreshOutputModel();                
-            ////        $scope.refreshButton();                                                                                                                 
-            ////    }
-            ////});            
+            // watch2 for changes in input model as a whole
+            // this on updates the multi-select when a user load a whole new input-model. We also update the $scope.backUp variable
+            $scope.$watch( 'localModel' , function( newVal ) {
+                if ( newVal ) {
+                    //$scope.backUp = angular.copy( $scope.localModel );
+                    $scope.updateFilter();
+                    $scope.prepareGrouping();
+                    $scope.prepareIndex();
+                    $scope.refreshOutputModel();
+                    $scope.refreshButton();
+                }
+            });
 
             // watch for changes in directive state (disabled or enabled)
             $scope.$watch( 'isDisabled' , function( newVal ) {         
@@ -1047,8 +1053,8 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             });
 
             if ($scope.localModel && $scope.localModel.length > 0) {
-            	$scope.refreshOutputModel();                                    
-            	$scope.refreshButton(); 
+            	$scope.refreshOutputModel();
+            	$scope.refreshButton();
             }
         }
     }
