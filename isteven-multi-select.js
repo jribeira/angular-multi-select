@@ -80,7 +80,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
             '<span class="multiSelect inlineBlock" id={{directiveId}}>' +
                 '<button type="button"' +
                     'ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton(); prepareGrouping; prepareIndex();"' +
-	                'automation-name="SelectedItemList"' +
+	                'automation-id="SelectedItemList"' +
 		            'automation-data="{{selectedItemList}}"' +
 		            'ng-bind-html="varButtonLabel">' +
                 '</button>' +
@@ -123,7 +123,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
                     '<div vs-repeat class="checkBoxContainer">' +
                         '<div '+
                             'ng-repeat="item in filteredModel | filter:removeGroupEndMarker" class="multiSelectItem"'+
-	                        'automation-name="{{item.displayText}}"' +
+	                        'automation-id="{{item.displayText}}"' +
                             'ng-class="{selected: item[ tickProperty ], horizontal: orientationH, vertical: orientationV, multiSelectGroup:item[ groupProperty ], disabled:itemIsDisabled( item )}"'+
                             'ng-click="syncItems( item, $event, $index );" '+
                             'ng-mouseleave="removeFocusStyle( tabIndex );"> '+
