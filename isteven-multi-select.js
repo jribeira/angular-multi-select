@@ -737,15 +737,15 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
                         helperItemsLength = helperItems.length + helperContainer.getElementsByTagName( 'INPUT' ).length;
                     }
                     
-                    // focus on the filter element on open. 
-                    if ( element[ 0 ].querySelector( '.inputFilter' ) ) {                        
-                        element[ 0 ].querySelector( '.inputFilter' ).focus();    
-                        $scope.tabIndex = $scope.tabIndex + helperItemsLength - 2;
-                    }
-                    // if there's no filter then just focus on the first checkbox item
-                    else {                                                
-                        formElements[ $scope.tabIndex ].focus();                                                
-                    }                       
+                   //// focus on the filter element on open.
+                    //if ( element[ 0 ].querySelector( '.inputFilter' ) ) {
+                    //    element[ 0 ].querySelector( '.inputFilter' ).focus();
+                    //    $scope.tabIndex = $scope.tabIndex + helperItemsLength - 2;
+                    //}
+                    //// if there's no filter then just focus on the first checkbox item
+                    //else {
+                    //    formElements[ $scope.tabIndex ].focus();
+                    //}                      
 
                     // open callback
                     $scope.onOpen();
