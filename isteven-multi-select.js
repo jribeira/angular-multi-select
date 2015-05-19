@@ -84,7 +84,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 					'automation-data="{{selectedItemList}}"' +
 					'ng-bind-html="varButtonLabel">' +
 				'</button>' +
-				'<div class="checkboxLayer" ng-if="!isDisabled">' +
+				'<div class="checkboxLayer" ng-show="!isDisabled">' +
 
 					'<div class="helperContainer" ng-show="displayHelper( \'filter\' ) || displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
 						'<div class="line" ng-show="displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
@@ -597,14 +597,13 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 				$scope.selectedItemList = '';
 				var ctr                 = 0;                  
 
-				// refresh button label...
-				if ($scope.outputModel.length === 0 && $scope.localModel.length) {
-					// https://github.com/isteven/angular-multi-select/pull/19                    
-					$scope.varButtonLabel = $scope.lang.nothingSelected;
-				}
-				else if ($scope.outputModel.length === 0 && !$scope.localModel.length) {
+				if (!$scope.localModel || !$scope.localModel.length) {
 					$scope.varButtonLabel = $scope.lang.nothingToSelect;
 					$scope.isDisabled = true;
+				 }
+				else if ($scope.outputModel.length === 0 && $scope.localModel.length) {
+						// https://github.com/isteven/angular-multi-select/pull/19                    
+						$scope.varButtonLabel = $scope.lang.nothingSelected;
 				}
 				else {                
 					var tempMaxLabels = $scope.outputModel.length;
