@@ -48,7 +48,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 			buttonLabel     : '@',
 			directiveId     : '@',
 			helperElements  : '@',            
-			isDisabled      : '=',
+			isDisabled      : '=?',
 			itemLabel       : '@',
 			maxLabels       : '@',
 			orientation     : '@',
@@ -153,7 +153,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 			'</div>'+
 		'</span>',                    
 
-		link: function ( $scope, element, attrs ) {                       
+		link: function ( $scope, element, attrs ) {
 
 			$scope.backUp           = [];
 			$scope.varButtonLabel   = '';               
@@ -677,7 +677,10 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 			}                                
 
 			// UI operations to show/hide checkboxes based on click event..
-			$scope.toggleCheckboxes = function( e ) {                                    
+			$scope.toggleCheckboxes = function( e ) {
+				if($scope.isDisabled) {
+					return;
+				}
 				
 				// We grab the button
 				var clickedEl = element.children()[0];
