@@ -33,7 +33,7 @@
 
 'use strict'
 
-angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'istevenMultiSelect' , [ '$sce', '$timeout', '$templateCache', function ( $sce, $timeout, $templateCache ) {
+angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect' , [ '$sce', '$timeout', '$templateCache', function ( $sce, $timeout, $templateCache ) {
 	return {
 		restrict: 
 			'AE',
@@ -120,7 +120,7 @@ angular.module( 'isteven-multi-select', ['ng', 'vs-repeat'] ).directive( 'isteve
 						'</div> '+
 					'</div> '+
 			
-					'<div vs-repeat class="checkBoxContainer">' +
+					'<div class="checkBoxContainer">' +
 						'<div '+
 							'ng-repeat="item in filteredModel | filter:removeGroupEndMarker" class="multiSelectItem"'+
 							'automation-id="{{item.displayText}}"' +
